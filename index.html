@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>外贸出海指南</title>
+<title>外贸经验分享 · 阿里运营说</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #fbfbfb;
+  --bg: #fafafa;
   --fg: #1d1d1f;
   --accent: #0066cc;
-  --accent-soft: #e8f0fe;
+  --accent-light: #e6f0fa;
+  --accent-orange: #ff6a00;
   --muted: #86868b;
   --border: #e5e5e7;
   --radius: 16px;
+  --card-bg: #ffffff;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -25,77 +27,182 @@ body {
   font-family: "Inter", -apple-system, sans-serif;
   background: var(--bg);
   color: var(--fg);
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
-/* nav */
+/* Floating WeChat button */
+.wechat-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #07c160;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(7,193,96,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  font-size: 28px;
+}
+.wechat-float:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(7,193,96,0.4);
+}
+.wechat-float-tip {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  z-index: 199;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  display: none;
+  width: 200px;
+  text-align: center;
+}
+.wechat-float-tip.show { display: block; }
+.wechat-float-tip img {
+  width: 160px;
+  height: 160px;
+  display: block;
+  margin: 0 auto 8px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  object-fit: contain;
+}
+.wechat-float-tip p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Nav */
 nav {
   position: fixed; top:0; left:0; right:0;
   z-index: 100;
-  padding: 0 24px;
   height: 52px;
   display: flex; align-items: center; justify-content: center;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  background: rgba(251,251,251,0.8);
+  background: rgba(250,250,250,0.85);
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s;
+  padding: 0 16px;
 }
 nav.scrolled { border-bottom-color: var(--border); }
 nav a {
   color: var(--fg);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.3px;
-  padding: 0 18px;
+  letter-spacing: 0.2px;
+  padding: 0 12px;
   transition: color 0.2s;
 }
 nav a:hover { color: var(--accent); }
 
-/* hero */
+/* Hero */
 .hero {
-  min-height: 85vh;
+  min-height: 90vh;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center;
-  padding: 120px 24px 80px;
+  padding: 120px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%; left: -20%;
+  width: 140%; height: 100%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(0,102,204,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero .badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 24px;
 }
 .hero h1 {
   font-family: "Noto Serif SC", serif;
-  font-size: clamp(2.4rem, 6vw, 4.2rem);
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.25;
   letter-spacing: -0.02em;
-  max-width: 720px;
-  margin-bottom: 20px;
+  max-width: 680px;
+  margin-bottom: 16px;
+  position: relative;
 }
 .hero .sub {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
   color: var(--muted);
-  max-width: 560px;
-  line-height: 1.7;
-  margin-bottom: 40px;
+  max-width: 540px;
+  line-height: 1.8;
+  margin-bottom: 20px;
 }
-.hero .cta {
-  display: inline-block;
-  background: var(--fg);
-  color: var(--bg);
-  padding: 14px 40px;
-  border-radius: 40px;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-.hero .cta:hover { opacity: 0.8; }
 
-/* sections */
+/* Hero QR section */
+.hero-qr {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 20px 28px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  margin-top: 8px;
+}
+.hero-qr .qr-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--muted);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.hero-qr .qr-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.hero-qr .qr-text {
+  text-align: left;
+}
+.hero-qr .qr-text strong {
+  font-size: 15px;
+  display: block;
+  margin-bottom: 4px;
+}
+.hero-qr .qr-text p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Sections */
 section {
-  max-width: 980px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 100px 24px;
+  padding: 80px 24px;
 }
 section + section { border-top: 1px solid var(--border); }
 
@@ -109,43 +216,44 @@ section + section { border-top: 1px solid var(--border); }
 }
 .section-title {
   font-family: "Noto Serif SC", serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  font-weight: 600;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
   line-height: 1.3;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .section-desc {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--muted);
   max-width: 600px;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
   line-height: 1.7;
 }
 
-/* card grid */
+/* Card grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 20px;
 }
 .card {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 32px 28px;
+  padding: 28px 24px;
+  border: 1px solid var(--border);
   transition: transform 0.25s, box-shadow 0.25s;
   cursor: default;
 }
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
 }
 .card .icon {
-  width: 40px; height: 40px;
+  width: 36px; height: 36px;
   border-radius: 10px;
-  background: var(--accent-soft);
+  background: var(--accent-light);
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 16px;
-  font-size: 18px;
+  margin-bottom: 14px;
+  font-size: 16px;
 }
 .card h3 {
   font-size: 1rem;
@@ -153,262 +261,504 @@ section + section { border-top: 1px solid var(--border); }
   margin-bottom: 8px;
 }
 .card p {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 12px;
+  line-height: 1.7;
+  margin-bottom: 10px;
 }
 .card .tag {
   display: inline-block;
   font-size: 11px;
   font-weight: 500;
   color: var(--accent);
-  background: var(--accent-soft);
+  background: var(--accent-light);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.card .highlight {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent-orange);
+  background: rgba(255,106,0,0.08);
   padding: 3px 10px;
   border-radius: 20px;
 }
 
-/* longform article style */
+/* Article style */
 .article {
   max-width: 680px;
 }
 .article h3 {
   font-family: "Noto Serif SC", serif;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin-top: 36px;
+  margin-top: 32px;
   margin-bottom: 10px;
 }
 .article p {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--muted);
   line-height: 1.8;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .article ul {
   padding-left: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .article li {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--muted);
   line-height: 1.8;
   margin-bottom: 6px;
 }
+.article .tip-box {
+  background: var(--accent-light);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  color: var(--fg);
+  border-left: 3px solid var(--accent);
+}
+.article .tip-box strong {
+  color: var(--accent);
+}
 
-/* footer */
+/* Case card */
+.case-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.case-card .case-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.case-card .case-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.case-card .case-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.case-card .case-industry {
+  font-size: 12px;
+  color: var(--muted);
+}
+.case-card .case-content {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Contact section */
+.contact-section {
+  text-align: center;
+  padding: 80px 24px 60px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.contact-section .qr-card {
+  display: inline-block;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 32px 40px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  margin-top: 24px;
+}
+.contact-section .qr-card .qr-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 auto 16px;
+  overflow: hidden;
+}
+.contact-section .qr-card .qr-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.contact-section .qr-card .qr-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+.contact-section .qr-card .qr-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.contact-section .btn-wechat {
+  display: inline-block;
+  background: #07c160;
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 16px;
+  transition: opacity 0.2s;
+}
+.contact-section .btn-wechat:hover { opacity: 0.85; }
+
+/* Footer */
 footer {
   text-align: center;
-  padding: 60px 24px;
+  padding: 40px 24px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
   border-top: 1px solid var(--border);
-  max-width: 980px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-/* reveal on scroll */
+/* Reveal */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .reveal.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* mobile */
+/* Mobile */
 @media (max-width: 640px) {
-  nav a { font-size: 12px; padding: 0 10px; }
-  section { padding: 60px 20px; }
+  nav a { font-size: 11px; padding: 0 8px; }
+  .hero { min-height: auto; padding: 100px 20px 40px; }
+  .hero-qr { flex-direction: column; text-align: center; padding: 16px 20px; }
+  .hero-qr .qr-text { text-align: center; }
+  section { padding: 48px 20px; }
   .grid { grid-template-columns: 1fr; }
-  .card { padding: 24px 20px; }
+  .contact-section .qr-card { padding: 24px; }
+}
+
+/* WeChat modal overlay */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  animation: modalIn 0.25s ease;
+}
+@keyframes modalIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.modal-box .qr-img {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 16px;
+  border-radius: 12px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--muted);
+  overflow: hidden;
+}
+.modal-box .qr-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.modal-box h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.modal-box p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.modal-box .btn-close {
+  background: var(--fg);
+  color: #fff;
+  border: none;
+  padding: 10px 32px;
+  border-radius: 24px;
+  font-size: 14px;
+  cursor: pointer;
 }
 </style>
 </head>
 <body>
 
-<nav id="navbar">
-  <a href="#intro">认知篇</a>
-  <a href="#product">选品篇</a>
-  <a href="#platform">平台篇</a>
-  <a href="#client">获客篇</a>
-  <a href="#logistics">物流篇</a>
-  <a href="#growth">成长篇</a>
-</nav>
-
-<div class="hero">
-  <h1>做好外贸，<br>从这里开始</h1>
-  <p class="sub">
-    无论是刚入行的新人，还是想系统梳理方法的老手——<br>
-    这里有一份关于外贸出海的经验和路径，清晰、直接、可落地。
-  </p>
-  <a class="cta" href="#intro">开始阅读</a>
+<!-- Floating WeChat -->
+<button class="wechat-float" id="wechatFloat" aria-label="联系我">💬</button>
+<div class="wechat-float-tip" id="wechatTip">
+  <div class="qr-img" style="width:160px;height:160px;margin:0 auto 8px;background:#f0f0f0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);overflow:hidden;">
+    <!-- 替换为你的微信二维码图片 -->
+    <img src="" alt="微信二维码" style="display:none">
+    <span class="placeholder-text">请替换为你的微信二维码</span>
+  </div>
+  <p>扫码加我微信</p>
 </div>
 
-<section id="intro" class="reveal">
-  <div class="section-label">认知篇</div>
-  <h2 class="section-title">先搞懂外贸是怎么回事</h2>
-  <p class="section-desc">在选品、找客户之前，先建立对国际贸易的基本认知框架。理解术语、流程和风险，后面每一步都会更稳。</p>
-  <div class="grid">
-    <div class="card">
-      <div class="icon">📦</div>
-      <h3>外贸 vs 内贸</h3>
-      <p>外贸面对的是不同国家的客户、语言、时差、支付方式和法律法规。核心差异在于：跨境、清关、外汇、信用证。</p>
+<!-- QR Modal -->
+<div class="modal-overlay" id="qrModal">
+  <div class="modal-box">
+    <div class="qr-img">
+      <!-- 替换为你的微信二维码图片 -->
+      <img src="" alt="微信二维码" style="display:none">
+      <span class="placeholder-text">请替换为你的微信二维码图片</span>
     </div>
-    <div class="card">
-      <div class="icon">🔤</div>
-      <h3>必须掌握的术语</h3>
-      <p>FOB、CIF、EXW、L/C、T/T、HS 编码……这些不是考试题，是日常沟通中的基本词汇。不懂这些没法报价。</p>
-      <span class="tag">新人必看</span>
+    <h3>添加我的微信</h3>
+    <p>扫码或搜索微信号，免费咨询外贸问题</p>
+    <button class="btn-close" onclick="closeModal()">关闭</button>
+  </div>
+</div>
+
+<nav id="navbar">
+  <a href="#about">关于</a>
+  <a href="#product">选品</a>
+  <a href="#operation">运营</a>
+  <a href="#pitfall">避坑</a>
+  <a href="#cases">案例</a>
+  <a href="#contact">联系</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <span class="badge">阿里国际站运营 · 经验分享</span>
+  <h1>做外贸，别再自己瞎琢磨了</h1>
+  <p class="sub">
+    我在阿里做了几年运营，经手过上百个商家的店铺。<br>
+    哪些产品好做、平台怎么玩、新人该从哪里入手——<br>
+    我把这些经验整理出来，希望帮到想了解外贸的朋友。
+  </p>
+  <div class="hero-qr">
+    <div class="qr-img">
+      <!-- 替换为你的微信二维码 -->
+      <img src="" alt="微信二维码" style="display:none">
+      <span class="placeholder-text">微信二维码<br>（替换此图）</span>
     </div>
-    <div class="card">
-      <div class="icon">💰</div>
-      <h3>贸易流程全景</h3>
-      <p>询盘 → 报价 → 合同 → 备货 → 报关 → 发货 → 收汇 → 退税。每一步都有坑，提前了解能少走弯路。</p>
+    <div class="qr-text">
+      <strong>扫码加我微信</strong>
+      <p>免费咨询外贸问题 · 帮你诊断店铺<br>添加请备注「外贸咨询」</p>
     </div>
+  </div>
+</div>
+
+<!-- Section: About -->
+<section id="about" class="reveal">
+  <div class="section-label">关于我</div>
+  <h2 class="section-title">为什么你可以相信我</h2>
+  <p class="section-desc">不是培训机构，也不是卖课的。我是阿里国际站一线运营，每天都在和商家、平台打交道。</p>
+  <div class="article">
+    <p>我在阿里巴巴国际站做客户运营，平时的工作就是帮商家分析店铺数据、优化产品、对接平台资源。这些年见过太多商家——有的做得风生水起，有的投了钱打了水漂。</p>
+    <p>我整理这些内容，不是为了卖课或者推销什么。纯粹是因为每天都有商家来问同样的问题，与其一个一个回复，不如写出来，让更多人看到。如果你看完觉得有用，欢迎加我微信聊。</p>
   </div>
 </section>
 
+<!-- Section: 选品 -->
 <section id="product" class="reveal">
   <div class="section-label">选品篇</div>
-  <h2 class="section-title">选对产品，成功一半</h2>
-  <p class="section-desc">好的产品自带流量。选品不是拍脑袋，而是基于数据、供应链和市场需求的分析。</p>
+  <h2 class="section-title">什么样的产品在平台上好卖</h2>
+  <p class="section-desc">很多新人一上来就问「做什么产品好」，但其实选品有规律可循。从平台运营的角度，我总结了几个方向。</p>
   <div class="grid">
     <div class="card">
-      <div class="icon">🔍</div>
-      <h3>用数据说话</h3>
-      <p>通过 Google Trends、海关数据、亚马逊 Best Seller 等工具，分析目标市场的搜索趋势和竞争格局。流量高、竞争低的产品是黄金地带。</p>
+      <div class="icon">📊</div>
+      <h3>看数据，别凭感觉</h3>
+      <p>平台上什么产品热搜、什么品类询盘多，后台都有数据。很多商家凭感觉选品，结果流量来了没有转化。</p>
+      <span class="highlight">运营建议</span>
     </div>
     <div class="card">
       <div class="icon">🏭</div>
-      <h3>供应链优先</h3>
-      <p>你所在的城市有什么产业带？重庆的摩托车配件、义乌的小商品、深圳的电子产品——就近选品，成本和质量都能控得住。</p>
+      <h3>就近选品，成本为王</h3>
+      <p>你所在城市有什么产业带，就优先做什么。重庆的摩托车配件、义乌的小商品、佛山的家具——供应链近就是优势。</p>
     </div>
     <div class="card">
-      <div class="icon">📐</div>
-      <h3>标准化 vs 定制化</h3>
-      <p>标品好上手，库存压力大；定制利润高，沟通成本也高。新人建议从标品开始，积累客户后再做定制。</p>
+      <div class="icon">💡</div>
+      <h3>避开红海，找细分</h3>
+      <p>大品类竞争激烈，新商家很难出头。试试在大品类里找细分需求——比如「宠物烘焙零食」而不是「宠物零食」。</p>
+      <span class="tag">干货</span>
+    </div>
+    <div class="card">
+      <div class="icon">💰</div>
+      <h3>利润算清楚再动手</h3>
+      <p>很多人只看售价不看成本。平台佣金、物流费、关税、退税……每一项都会吃掉利润。建议新手选毛利率 40% 以上的产品。</p>
     </div>
   </div>
 </section>
 
-<section id="platform" class="reveal">
-  <div class="section-label">平台篇</div>
-  <h2 class="section-title">选对渠道，少花冤枉钱</h2>
-  <p class="section-desc">B2B 还是 B2C？自建站还是第三方平台？不同的产品和目标市场，适合的渠道完全不同。</p>
+<!-- Section: 运营 -->
+<section id="operation" class="reveal">
+  <div class="section-label">运营篇</div>
+  <h2 class="section-title">平台运营的几个真相</h2>
+  <p class="section-desc">以下内容来自日常工作中的真实观察。有些话可能不太好听，但都是实话。</p>
   <div class="grid">
     <div class="card">
-      <div class="icon">🌐</div>
-      <h3>阿里巴巴国际站</h3>
-      <p>国内最大的 B2B 平台，适合工厂和贸易公司。年费几万到几十万不等，适合有一定资金实力的团队。</p>
-      <span class="tag">B2B 首选</span>
+      <div class="icon">🔍</div>
+      <h3>标题不是写给客户看的</h3>
+      <p>平台搜索排名靠的是关键词匹配，不是标题写得好不好看。很多商家标题写得像广告，结果客户根本搜不到。</p>
+      <span class="highlight">运营建议</span>
     </div>
     <div class="card">
-      <div class="icon">🛒</div>
-      <h3>亚马逊 & Shopee</h3>
-      <p>亚马逊适合欧美市场，Shopee 覆盖东南亚。B2C 模式，运营门槛高，但对新手来说试错成本可控。</p>
+      <div class="icon">📸</div>
+      <h3>主图决定生死</h3>
+      <p>在搜索结果页，客户看到的就是一张小图。主图没拍好，产品再好也没用。建议至少花 2000 块以上拍一套专业产品图。</p>
+      <span class="tag">干货</span>
     </div>
     <div class="card">
-      <div class="icon">🌍</div>
-      <h3>自建站 + 独立站</h3>
-      <p>Shopify + Google/Facebook 广告引流，利润空间最大，但需要一定的流量运营能力。有积累后再做不迟。</p>
-      <span class="tag">进阶选项</span>
+      <div class="icon">📈</div>
+      <h3>不要一上来就投广告</h3>
+      <p>很多商家开了店就砸钱投直通车，结果转化率极低。先把基础优化做好——产品发满 20 个、主图达标、价格合理——再考虑投流。</p>
+    </div>
+    <div class="card">
+      <div class="icon">⏰</div>
+      <h3>回复速度影响排名</h3>
+      <p>平台考核回复率。客户发询盘，1 小时内回复和 24 小时后回复，权重差距很大。建议开通 App 通知，随时回复。</p>
+    </div>
+  </div>
+  <div class="article" style="margin-top:40px">
+    <div class="tip-box">
+      <strong>运营小贴士：</strong>每天花 15 分钟看看同行店铺，学他们的标题写法、图片风格和定价策略。很多时候最好的学习素材就在竞争对手那里。
     </div>
   </div>
 </section>
 
-<section id="client" class="reveal">
-  <div class="section-label">获客篇</div>
-  <h2 class="section-title">客户不会自己找上门</h2>
-  <p class="section-desc">无论是 cold email、展会还是社交媒体，获客是外贸人最核心的能力。方法对了，效率翻倍。</p>
+<!-- Section: 避坑 -->
+<section id="pitfall" class="reveal">
+  <div class="section-label">避坑篇</div>
+  <h2 class="section-title">新人最容易踩的 5 个坑</h2>
+  <p class="section-desc">这些坑我每年看到无数人掉进去。提前知道，能省下几万块的学费。</p>
   <div class="article">
-    <h3>开发信（Cold Email）</h3>
-    <p>核心原则：短（不超过 5 句话）、定制（了解客户的业务）、有钩子（提供价值）。标题格式：[客户公司名] + [你的产品关键词]。发送时间建议目标国家的上午 9-11 点。</p>
-    <h3>展会参展</h3>
-    <p>广交会、CES、德国法兰克福展等是传统获客渠道。参展前做好邀约，展后 48 小时内跟进，才有转化。</p>
-    <h3>LinkedIn 开发</h3>
-    <p>LinkedIn 是 B2B 获客的金矿。完善个人资料，主动连接目标客户，发有价值的内容而非垃圾广告。</p>
-    <ul>
-      <li>每天加 20-30 个潜在客户</li>
-      <li>不要上来就发报价，先建立信任</li>
-      <li>分享行业见解比发产品图有效 10 倍</li>
-    </ul>
-    <h3>海关数据反向获客</h3>
-    <p>通过海关数据找到正在进口你同类产品的买家，直接联系。这是精准度最高的方式，但需要一定的数据源投入。</p>
+    <h3>1. 盲目跟品，不做调研</h3>
+    <p>看别人卖什么就跟着卖什么，结果一上线发现价格战打得头破血流。选品之前至少花一周做数据调研。</p>
+    <h3>2. 报价全靠拍脑袋</h3>
+    <p>报高了客户跑了，报低了自己亏。报价之前必须算清楚：产品成本 + 平台佣金（5-8%）+ 物流费 + 关税 + 预期利润。</p>
+    <h3>3. 忽略认证要求</h3>
+    <p>不同国家对不同产品有严格的准入要求。电子产品出口欧洲要 CE 认证，出口美国要 FDA。没有认证，货到了港口被扣的风险很高。</p>
+    <h3>4. 轻信代运营</h3>
+    <p>市面上的代运营公司良莠不齐。很多收了钱就发几个产品，效果根本没有。如果你的预算有限，建议先自己学，亲自操盘。</p>
+    <h3>5. 不重视售后</h3>
+    <p>外贸不是一锤子买卖。一个售后没处理好，客户一个差评就能让你的店铺排名掉一大截。建议建立标准化的售后流程。</p>
+    <div class="tip-box">
+      <strong>想了解更多避坑经验？</strong> 加我微信，我发你一份详细的外贸新人避坑清单。
+    </div>
   </div>
 </section>
 
-<section id="logistics" class="reveal">
-  <div class="section-label">物流篇</div>
-  <h2 class="section-title">把货安全、准时送到</h2>
-  <p class="section-desc">物流是外贸履约的关键环节。选对物流方式、做好报关安排，能避免 80% 的售后问题。</p>
-  <div class="grid">
-    <div class="card">
-      <div class="icon">🚢</div>
-      <h3>海运（最常用）</h3>
-      <p>整柜（FCL）适合大货，拼柜（LCL）适合小批量。重庆经长江到上海港出海，内河运输约 5-7 天。</p>
+<!-- Section: 案例 -->
+<section id="cases" class="reveal">
+  <div class="section-label">真实案例</div>
+  <h2 class="section-title">我亲眼见过的商家故事</h2>
+  <p class="section-desc">以下案例均来自我工作中接触到的真实商家（信息已脱敏），希望能给你一些启发。</p>
+
+  <div class="case-card">
+    <div class="case-header">
+      <div class="case-avatar">🏭</div>
+      <div>
+        <div class="case-name">张总 · 机械配件厂</div>
+        <div class="case-industry">重庆某机械加工企业</div>
+      </div>
     </div>
-    <div class="card">
-      <div class="icon">🚄</div>
-      <h3>中欧班列</h3>
-      <p>重庆始发至德国杜伊斯堡，全程 12-14 天。比海运快，比空运便宜，适合高附加值产品。</p>
-    </div>
-    <div class="card">
-      <div class="icon">✈️</div>
-      <h3>空运 & 快递</h3>
-      <p>适合样品、紧急订单和高货值产品。DHL、FedEx 等国际快递到欧美约 3-5 天，费用较高。</p>
+    <div class="case-content">
+      做了 10 年内贸，2024 年决定转型外贸。一开始连 FOB 和 CIF 都分不清，主图也是用手机拍的。我帮他重新规划了产品线，优化了关键词和主图，三个月后接到了第一笔海外订单。现在月询盘稳定在 50+。
     </div>
   </div>
-  <div class="article" style="margin-top:48px">
-    <h3>报关贴士</h3>
-    <p>新手建议直接委托报关行，费用通常几百元一票。需要准备的资料：商业发票、装箱单、报关单、合同。HS 编码一定要确认准确，错了可能导致查验、罚款甚至退货。</p>
+
+  <div class="case-card">
+    <div class="case-header">
+      <div class="case-avatar">👩‍💼</div>
+      <div>
+        <div class="case-name">李姐 · 家居用品</div>
+        <div class="case-industry">义乌个体户转型</div>
+      </div>
+    </div>
+    <div class="case-content">
+      之前在线下批发市场做生意，利润越来越薄。看到跨境电商的机会但不知道从哪入手。从选品到上架到第一单，前后花了两个月。现在每月线上销售额超过 10 万。
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header">
+      <div class="case-avatar">👨‍🔧</div>
+      <div>
+        <div class="case-name">小王 · 汽配创业者</div>
+        <div class="case-industry">90 后，从零开始做外贸</div>
+      </div>
+    </div>
+    <div class="case-content">
+      大学刚毕业，家里没有外贸背景。自己研究平台规则、学写开发信、半夜爬起来回复海外客户的询盘。第一年成交额不算大，但第二年翻了三倍。他的经验证明，外贸这事不太看背景，主要看用心程度和学习能力。
+    </div>
+  </div>
+
+  <div class="article" style="margin-top:24px">
+    <div class="tip-box">
+      <strong>注意：</strong>每个商家的产品、预算、目标市场都不一样。别人的成功路径可以借鉴，但不能照搬。如果你想知道自己的产品适不适合做外贸，可以加我微信聊聊。
+    </div>
   </div>
 </section>
 
-<section id="growth" class="reveal">
-  <div class="section-label">成长篇</div>
-  <h2 class="section-title">从小白到高手的路径</h2>
-  <p class="section-desc">外贸不是一夜暴富的行业，但有一条清晰的成长路径。每一步走扎实，结果自然来。</p>
-  <div class="article">
-    <h3>第一阶段：学习期（1-3 个月）</h3>
-    <ul>
-      <li>熟悉外贸术语和基本流程</li>
-      <li>了解公司产品和目标市场</li>
-      <li>学习开发信写作和平台操作</li>
-      <li>跟单 1-2 个订单，跑通全流程</li>
-    </ul>
-    <h3>第二阶段：实战期（3-12 个月）</h3>
-    <ul>
-      <li>独立开发 5-10 个潜在客户</li>
-      <li>成交第一单，建立信心</li>
-      <li>积累客户反馈，优化产品描述和报价策略</li>
-      <li>开始关注数据：询盘转化率、客户跟进率</li>
-    </ul>
-    <h3>第三阶段：增长期（1-3 年）</h3>
-    <ul>
-      <li>建立自己的客户池和供应商网络</li>
-      <li>尝试多渠道获客，降低对单一平台的依赖</li>
-      <li>培养对行业趋势的判断力</li>
-      <li>利润稳定的前提下，考虑团队扩张</li>
-    </ul>
+<!-- Contact -->
+<section id="contact" class="reveal" style="border-top:1px solid var(--border);text-align:center;padding-bottom:100px">
+  <div class="section-label">联系我</div>
+  <h2 class="section-title">如果你也想做外贸</h2>
+  <p class="section-desc" style="margin:0 auto 32px;text-align:center">
+    不管你是刚有想法、还是已经开了店遇到了问题——<br>
+    加我微信聊聊，免费帮你分析一下你的情况。
+  </p>
+
+  <div class="qr-card" style="display:inline-block;background:var(--card-bg);border-radius:20px;padding:32px 40px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,0.04);">
+    <div class="qr-img" style="width:160px;height:160px;border-radius:12px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);margin:0 auto 16px;overflow:hidden;">
+      <!-- 替换为你的微信二维码 -->
+      <img src="" alt="微信二维码" style="display:none">
+      <span class="placeholder-text">请替换为你的<br>微信二维码图片</span>
+    </div>
+    <div class="qr-label">添加我的微信</div>
+    <div class="qr-sub">免费咨询 · 备注「外贸」优先通过</div>
   </div>
 </section>
 
 <footer>
-  <p>外贸出海指南 · 持续更新中</p>
-  <p style="margin-top:4px">内容仅供参考，不构成商业建议</p>
+  <p>阿里运营经验分享 · 内容持续更新</p>
+  <p style="margin-top:4px;font-size:11px">以上内容仅供参考，不构成商业建议</p>
 </footer>
 
 <script>
-// nav scroll style
+// Nav scroll
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 });
 
-// reveal animation
+// Scroll reveal
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach(e => {
@@ -418,6 +768,44 @@ const observer = new IntersectionObserver(
   { threshold: 0.08 }
 );
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// WeChat float
+const floatBtn = document.getElementById('wechatFloat');
+const tip = document.getElementById('wechatTip');
+let tipTimer;
+
+floatBtn.addEventListener('click', () => {
+  tip.classList.toggle('show');
+  clearTimeout(tipTimer);
+  if (tip.classList.contains('show')) {
+    tipTimer = setTimeout(() => tip.classList.remove('show'), 5000);
+  }
+});
+
+// Close tip on outside click
+document.addEventListener('click', (e) => {
+  if (!floatBtn.contains(e.target) && !tip.contains(e.target)) {
+    tip.classList.remove('show');
+  }
+});
+
+// QR Modal - when clicking placeholder QR images that don't have real images
+// This can be used to show a larger version
+document.querySelectorAll('.qr-img img').forEach(img => {
+  img.addEventListener('click', () => {
+    if (img.src && !img.src.includes('placeholder')) {
+      document.getElementById('qrModal').classList.add('open');
+    }
+  });
+});
+
+function closeModal() {
+  document.getElementById('qrModal').classList.remove('open');
+}
+// Close modal on overlay click
+document.getElementById('qrModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('qrModal')) closeModal();
+});
 </script>
 </body>
 </html>
