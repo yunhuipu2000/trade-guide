@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>外贸出海指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fbfbfb;
+  --fg: #1d1d1f;
+  --accent: #0066cc;
+  --accent-soft: #e8f0fe;
+  --muted: #86868b;
+  --border: #e5e5e7;
+  --radius: 16px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Inter", -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* nav */
+nav {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 100;
+  padding: 0 24px;
+  height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(251,251,251,0.8);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+nav.scrolled { border-bottom-color: var(--border); }
+nav a {
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  padding: 0 18px;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--accent); }
+
+/* hero */
+.hero {
+  min-height: 85vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+}
+.hero h1 {
+  font-family: "Noto Serif SC", serif;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  max-width: 720px;
+  margin-bottom: 20px;
+}
+.hero .sub {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+.hero .cta {
+  display: inline-block;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 14px 40px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.hero .cta:hover { opacity: 0.8; }
+
+/* sections */
+section {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+section + section { border-top: 1px solid var(--border); }
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: "Noto Serif SC", serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.section-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* card grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: default;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+.card .icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+.card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.card p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.card .tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* longform article style */
+.article {
+  max-width: 680px;
+}
+.article h3 {
+  font-family: "Noto Serif SC", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 36px;
+  margin-bottom: 10px;
+}
+.article p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.article ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.article li {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 6px;
+}
+
+/* footer */
+footer {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--muted);
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* mobile */
+@media (max-width: 640px) {
+  nav a { font-size: 12px; padding: 0 10px; }
+  section { padding: 60px 20px; }
+  .grid { grid-template-columns: 1fr; }
+  .card { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#intro">认知篇</a>
+  <a href="#product">选品篇</a>
+  <a href="#platform">平台篇</a>
+  <a href="#client">获客篇</a>
+  <a href="#logistics">物流篇</a>
+  <a href="#growth">成长篇</a>
+</nav>
+
+<div class="hero">
+  <h1>做好外贸，<br>从这里开始</h1>
+  <p class="sub">
+    无论是刚入行的新人，还是想系统梳理方法的老手——<br>
+    这里有一份关于外贸出海的经验和路径，清晰、直接、可落地。
+  </p>
+  <a class="cta" href="#intro">开始阅读</a>
+</div>
+
+<section id="intro" class="reveal">
+  <div class="section-label">认知篇</div>
+  <h2 class="section-title">先搞懂外贸是怎么回事</h2>
+  <p class="section-desc">在选品、找客户之前，先建立对国际贸易的基本认知框架。理解术语、流程和风险，后面每一步都会更稳。</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">📦</div>
+      <h3>外贸 vs 内贸</h3>
+      <p>外贸面对的是不同国家的客户、语言、时差、支付方式和法律法规。核心差异在于：跨境、清关、外汇、信用证。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔤</div>
+      <h3>必须掌握的术语</h3>
+      <p>FOB、CIF、EXW、L/C、T/T、HS 编码……这些不是考试题，是日常沟通中的基本词汇。不懂这些没法报价。</p>
+      <span class="tag">新人必看</span>
+    </div>
+    <div class="card">
+      <div class="icon">💰</div>
+      <h3>贸易流程全景</h3>
+      <p>询盘 → 报价 → 合同 → 备货 → 报关 → 发货 → 收汇 → 退税。每一步都有坑，提前了解能少走弯路。</p>
+    </div>
+  </div>
+</section>
+
+<section id="product" class="reveal">
+  <div class="section-label">选品篇</div>
+  <h2 class="section-title">选对产品，成功一半</h2>
+  <p class="section-desc">好的产品自带流量。选品不是拍脑袋，而是基于数据、供应链和市场需求的分析。</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🔍</div>
+      <h3>用数据说话</h3>
+      <p>通过 Google Trends、海关数据、亚马逊 Best Seller 等工具，分析目标市场的搜索趋势和竞争格局。流量高、竞争低的产品是黄金地带。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏭</div>
+      <h3>供应链优先</h3>
+      <p>你所在的城市有什么产业带？重庆的摩托车配件、义乌的小商品、深圳的电子产品——就近选品，成本和质量都能控得住。</p>
+    </div>
+    <div class="card">
+      <div class="icon">📐</div>
+      <h3>标准化 vs 定制化</h3>
+      <p>标品好上手，库存压力大；定制利润高，沟通成本也高。新人建议从标品开始，积累客户后再做定制。</p>
+    </div>
+  </div>
+</section>
+
+<section id="platform" class="reveal">
+  <div class="section-label">平台篇</div>
+  <h2 class="section-title">选对渠道，少花冤枉钱</h2>
+  <p class="section-desc">B2B 还是 B2C？自建站还是第三方平台？不同的产品和目标市场，适合的渠道完全不同。</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🌐</div>
+      <h3>阿里巴巴国际站</h3>
+      <p>国内最大的 B2B 平台，适合工厂和贸易公司。年费几万到几十万不等，适合有一定资金实力的团队。</p>
+      <span class="tag">B2B 首选</span>
+    </div>
+    <div class="card">
+      <div class="icon">🛒</div>
+      <h3>亚马逊 & Shopee</h3>
+      <p>亚马逊适合欧美市场，Shopee 覆盖东南亚。B2C 模式，运营门槛高，但对新手来说试错成本可控。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌍</div>
+      <h3>自建站 + 独立站</h3>
+      <p>Shopify + Google/Facebook 广告引流，利润空间最大，但需要一定的流量运营能力。有积累后再做不迟。</p>
+      <span class="tag">进阶选项</span>
+    </div>
+  </div>
+</section>
+
+<section id="client" class="reveal">
+  <div class="section-label">获客篇</div>
+  <h2 class="section-title">客户不会自己找上门</h2>
+  <p class="section-desc">无论是 cold email、展会还是社交媒体，获客是外贸人最核心的能力。方法对了，效率翻倍。</p>
+  <div class="article">
+    <h3>开发信（Cold Email）</h3>
+    <p>核心原则：短（不超过 5 句话）、定制（了解客户的业务）、有钩子（提供价值）。标题格式：[客户公司名] + [你的产品关键词]。发送时间建议目标国家的上午 9-11 点。</p>
+    <h3>展会参展</h3>
+    <p>广交会、CES、德国法兰克福展等是传统获客渠道。参展前做好邀约，展后 48 小时内跟进，才有转化。</p>
+    <h3>LinkedIn 开发</h3>
+    <p>LinkedIn 是 B2B 获客的金矿。完善个人资料，主动连接目标客户，发有价值的内容而非垃圾广告。</p>
+    <ul>
+      <li>每天加 20-30 个潜在客户</li>
+      <li>不要上来就发报价，先建立信任</li>
+      <li>分享行业见解比发产品图有效 10 倍</li>
+    </ul>
+    <h3>海关数据反向获客</h3>
+    <p>通过海关数据找到正在进口你同类产品的买家，直接联系。这是精准度最高的方式，但需要一定的数据源投入。</p>
+  </div>
+</section>
+
+<section id="logistics" class="reveal">
+  <div class="section-label">物流篇</div>
+  <h2 class="section-title">把货安全、准时送到</h2>
+  <p class="section-desc">物流是外贸履约的关键环节。选对物流方式、做好报关安排，能避免 80% 的售后问题。</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🚢</div>
+      <h3>海运（最常用）</h3>
+      <p>整柜（FCL）适合大货，拼柜（LCL）适合小批量。重庆经长江到上海港出海，内河运输约 5-7 天。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🚄</div>
+      <h3>中欧班列</h3>
+      <p>重庆始发至德国杜伊斯堡，全程 12-14 天。比海运快，比空运便宜，适合高附加值产品。</p>
+    </div>
+    <div class="card">
+      <div class="icon">✈️</div>
+      <h3>空运 & 快递</h3>
+      <p>适合样品、紧急订单和高货值产品。DHL、FedEx 等国际快递到欧美约 3-5 天，费用较高。</p>
+    </div>
+  </div>
+  <div class="article" style="margin-top:48px">
+    <h3>报关贴士</h3>
+    <p>新手建议直接委托报关行，费用通常几百元一票。需要准备的资料：商业发票、装箱单、报关单、合同。HS 编码一定要确认准确，错了可能导致查验、罚款甚至退货。</p>
+  </div>
+</section>
+
+<section id="growth" class="reveal">
+  <div class="section-label">成长篇</div>
+  <h2 class="section-title">从小白到高手的路径</h2>
+  <p class="section-desc">外贸不是一夜暴富的行业，但有一条清晰的成长路径。每一步走扎实，结果自然来。</p>
+  <div class="article">
+    <h3>第一阶段：学习期（1-3 个月）</h3>
+    <ul>
+      <li>熟悉外贸术语和基本流程</li>
+      <li>了解公司产品和目标市场</li>
+      <li>学习开发信写作和平台操作</li>
+      <li>跟单 1-2 个订单，跑通全流程</li>
+    </ul>
+    <h3>第二阶段：实战期（3-12 个月）</h3>
+    <ul>
+      <li>独立开发 5-10 个潜在客户</li>
+      <li>成交第一单，建立信心</li>
+      <li>积累客户反馈，优化产品描述和报价策略</li>
+      <li>开始关注数据：询盘转化率、客户跟进率</li>
+    </ul>
+    <h3>第三阶段：增长期（1-3 年）</h3>
+    <ul>
+      <li>建立自己的客户池和供应商网络</li>
+      <li>尝试多渠道获客，降低对单一平台的依赖</li>
+      <li>培养对行业趋势的判断力</li>
+      <li>利润稳定的前提下，考虑团队扩张</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>外贸出海指南 · 持续更新中</p>
+  <p style="margin-top:4px">内容仅供参考，不构成商业建议</p>
+</footer>
+
+<script>
+// nav scroll style
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// reveal animation
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('show');
+    });
+  },
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
