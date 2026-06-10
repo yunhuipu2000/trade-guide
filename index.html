@@ -517,24 +517,10 @@ footer {
 <body>
 
 <!-- Floating WeChat -->
-<button class="wechat-float" id="wechatFloat" aria-label="联系我">💬</button>
-<div class="wechat-float-tip" id="wechatTip">
-  <div class="qr-img" style="width:160px;height:160px;margin:0 auto 8px;background:#f0f0f0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);overflow:hidden;">
-    <!-- 替换为你的微信二维码图片 -->
-    <img src="" alt="微信二维码" style="display:none">
-    <span class="placeholder-text">请替换为你的微信二维码</span>
-  </div>
-  <p>扫码加我微信</p>
-</div>
+<a class="wechat-float" id="wechatFloat" href="weixin://" target="_blank" aria-label="联系我">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 9.5c0 2.5-2.5 4.5-5.5 4.5s-5.5-2-5.5-4.5S9 5 12 5s5.5 2 5.5 4.5Z"/><path d="M12 5c3.3 0 6 2 6 4.5 0 .8-.3 1.5-.7 2.2L19 15l-2.5-1.3c-1.1.4-2.3.6-3.5.6" opacity=".3"/><path d="M8 10.5c0 .8.5 1.5 1 2" opacity=".5"/></svg>
+</a>
 
-<!-- QR Modal -->
-<div class="modal-overlay" id="qrModal">
-  <div class="modal-box">
-    <div class="qr-img">
-      <!-- 替换为你的微信二维码图片 -->
-      <img src="" alt="微信二维码" style="display:none">
-      <span class="placeholder-text">请替换为你的微信二维码图片</span>
-    </div>
     <h3>添加我的微信</h3>
     <p>扫码或搜索微信号，免费咨询外贸问题</p>
     <button class="btn-close" onclick="closeModal()">关闭</button>
@@ -559,12 +545,6 @@ footer {
     哪些产品好做、平台怎么玩、新人该从哪里入手——<br>
     我把这些经验整理出来，希望帮到想了解外贸的朋友。
   </p>
-  <div class="hero-qr">
-    <div class="qr-img">
-      <!-- 替换为你的微信二维码 -->
-      <img src="" alt="微信二维码" style="display:none">
-      <span class="placeholder-text">微信二维码<br>（替换此图）</span>
-    </div>
     <div class="qr-text">
       <strong>扫码加我微信</strong>
       <p>免费咨询外贸问题 · 帮你诊断店铺<br>添加请备注「外贸咨询」</p>
@@ -733,13 +713,17 @@ footer {
     加我微信聊聊，免费帮你分析一下你的情况。
   </p>
 
+  <a href="weixin://" target="_blank" class="btn-wechat" style="display:inline-block;background:#07c160;color:#fff;padding:14px 40px;border-radius:40px;font-size:16px;font-weight:500;text-decoration:none;margin-bottom:20px;transition:opacity 0.2s;">
+    微信联系我
+  </a>
+
   <div class="qr-card" style="display:inline-block;background:var(--card-bg);border-radius:20px;padding:32px 40px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,0.04);">
     <div class="qr-img" style="width:160px;height:160px;border-radius:12px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);margin:0 auto 16px;overflow:hidden;">
       <!-- 替换为你的微信二维码 -->
       <img src="" alt="微信二维码" style="display:none">
       <span class="placeholder-text">请替换为你的<br>微信二维码图片</span>
     </div>
-    <div class="qr-label">添加我的微信</div>
+    <div class="qr-label">或扫码添加我的微信</div>
     <div class="qr-sub">免费咨询 · 备注「外贸」优先通过</div>
   </div>
 </section>
@@ -787,23 +771,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// QR Modal - when clicking placeholder QR images that don't have real images
-// This can be used to show a larger version
-document.querySelectorAll('.qr-img img').forEach(img => {
-  img.addEventListener('click', () => {
-    if (img.src && !img.src.includes('placeholder')) {
-      document.getElementById('qrModal').classList.add('open');
-    }
-  });
-});
 
-function closeModal() {
-  document.getElementById('qrModal').classList.remove('open');
-}
-// Close modal on overlay click
-document.getElementById('qrModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('qrModal')) closeModal();
-});
 </script>
 </body>
 </html>
